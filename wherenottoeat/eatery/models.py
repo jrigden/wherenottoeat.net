@@ -14,7 +14,7 @@ class Restaurant(models.Model):
 
 class Inspection(models.Model):
     Inspection_Date = models.DateField()
-    Inspection_Closed_Business = model.BooleanField()
+    Inspection_Closed_Business = models.BooleanField()
     Inspection_Result = models.CharField(max_length=50)
     Inspection_Score = models.IntegerField()
     Inspection_Serial_Num = models.CharField(max_length=50, unique=True)
