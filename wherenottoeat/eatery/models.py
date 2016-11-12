@@ -18,8 +18,8 @@ class Inspection(models.Model):
     Inspection_Result = models.CharField(max_length=50)
     Inspection_Score = models.IntegerField()
     Inspection_Serial_Num = models.CharField(max_length=50, unique=True)
-    Inspection Type = models.CharField(max_length=50)
-    Restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE,)
+    Inspection_Type = models.CharField(max_length=50)
+    Restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
 
 
 class Violation(models.Model):
