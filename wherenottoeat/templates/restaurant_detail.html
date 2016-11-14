@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+ {% load humanize %}
+<h2 class="text-center">
+  {{restaurant.Name}}
+  <br>
+  <small>
+    {{restaurant.Address|title}} {{restaurant.City|title}}, Wa. {{restaurant.Zip_Code}}
+  </small>
+</h2>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h1 class="text-center">Total Violation Points:
+      <br>
+    {{restaurant.Total_Violation_Points}}</h1>
+  </div>
+</div>
+
+<h3>Violations</h3>
+{% for violation in violations %}
+  {% if violation.Violation_Type == "red" %}
+    <div class="alert alert-danger" role="alert">
+  {% endif %}
+  {% if violation.Violation_Type == "blue" %}
+    <div class="alert alert-warning" role="alert">
+  {% endif %}
+
+    <strong>
+    {{violation.Inspection.Inspection_Date|naturaltime}} -
+    <a href="/inspection/{{ violation.Inspection.Inspection_Serial_Num }}" class="alert-link">{{ violation.Inspection.Inspection_Serial_Num }}</a>
+    <br>
+      {{violation.Violation_Description}}
+    </strong>
+  </div>
+
+
+{% endfor %}
+
+<h3>Inspections</h3>
+  <div class="list-group">
+  {% for inspection in inspections %}
+  <a href="/inspection/{{ inspection.Inspection_Serial_Num }}" class="list-group-item"><span class="badge">{{ inspection.Inspection_Score }}</span>{{ inspection.Inspection_Serial_Num }}</a>
+  {% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+
+
+
+<div class="alert alert-success" role="alert" id="location-request">
+  <h3 class="text-center">
+    Attempting to access to your location
+  </h3>
+</div>
+
+
+<div id="geo-deny" class="alert alert-danger" role="alert" style="display: none;">
+  <h3 class="text-center">
+    Our request for your geolocation data has been denied.
+  </h3>
+  <p class="text-center">
+    You can reset this in your browser settings.
+    <br>
+    Good Luck with dinner tonight
+  </p>
+</div>
+
+
+
+<script>
+$( document ).ready(function() {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  function success(pos) {
+    var crd = pos.coords;
+    window.location.replace("/location/5/" + crd.latitude + "/" + crd.longitude);
+
+  };
+
+  function error(err) {
+    $( "#location-request" ).hide();
+    $( "#geo-deny" ).show();
+  };
+
+  navigator.geolocation.getCurrentPosition(success, error, options);
+});
+
+</script>
+{% endblock %}

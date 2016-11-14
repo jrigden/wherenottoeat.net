@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+ {% load humanize %}
+<h2 class="text-center">
+  Inspection: {{inspection.Inspection_Serial_Num}}
+  <br>
+  <small>
+    {{inspection.Inspection_Date|date:"SHORT_DATE_FORMAT" }} - {{inspection.Inspection_Date|naturaltime}}
+    <br>
+    <a href="/restaurant/{{inspection.Restaurant.Business_ID}}">{{inspection.Restaurant.Name}}</a>
+
+  </small>
+</h2>
+<strong>
+  Inspection Type:
+</strong>
+  {{inspection.Inspection_Type}}
+<br>
+<strong>
+  Inspection Score:
+</strong>
+{{inspection.Inspection_Score}}
+<br>
+<strong>
+  Result:
+</strong>
+{{inspection.Inspection_Result}}
+
+
+
+<h3>Violations</h3>
+{% for violation in violations %}
+  {% if violation.Violation_Type == "red" %}
+    <div class="alert alert-danger" role="alert">
+  {% endif %}
+  {% if violation.Violation_Type == "blue" %}
+    <div class="alert alert-warning" role="alert">
+  {% endif %}
+
+    <strong>
+      {{violation.Violation_Description}}
+    </strong>
+  </div>
+
+
+{% endfor %}
+
+
+{% endblock %}

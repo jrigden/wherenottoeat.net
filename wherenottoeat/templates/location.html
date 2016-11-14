@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">
+Where Not To Eat
+<br>
+<small>Within {{radius}} kilometer of your location</small>
+</h1>
+
+{% for restaurant in restaurants %}
+<h3>
+  <a href="/restaurant/{{restaurant.Business_ID}}">{{restaurant.Name}}</a>
+
+  <br>
+  <small>
+    {{restaurant.Address}}, {{restaurant.City}}, WA {{restaurant.Zip_Code}}
+  </small>
+</h3>
+
+  <h4>
+  <strong>{{restaurant.Total_Violation_Points}}</strong> Total Violation Points
+  </small>
+</h4>
+<hr>
+
+{% endfor %}
+{% endblock %}
